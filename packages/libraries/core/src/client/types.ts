@@ -15,6 +15,9 @@ export interface HiveClient {
   createInstrumentedExecute(executeImpl: any): any;
   createInstrumentedSubscribe(executeImpl: any): any;
   dispose(): Promise<void>;
+  persistedDocuments: null | {
+    resolve(documentId: string): Promise<string | null>;
+  };
 }
 
 export type AsyncIterableIteratorOrValue<T> = AsyncIterableIterator<T> | T;
@@ -204,6 +207,11 @@ export type HivePluginOptions = OptionalWhenFalse<
      * Yoga / Envelop: Enabled by default for SIGINT and SIGTERM signals
      */
     autoDispose?: boolean | NodeJS.Signals[];
+    /** Persisted operations configuration. */
+    persistedDocuments?: {
+      accessToken: string;
+      endpoint: string;
+    };
   },
   'enabled',
   'token'
