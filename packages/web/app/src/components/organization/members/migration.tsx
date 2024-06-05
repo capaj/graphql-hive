@@ -16,7 +16,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { CardDescription, CardTitle } from '@/components/ui/card';
+import { CardDescription } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -26,15 +26,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { ProductUpdatesLink } from '@/components/ui/docs-note';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Input } from '@/components/ui/input';
+import { SubPageLayout, SubPageLayoutHeader } from '@/components/ui/page-content-layout';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useToast } from '@/components/ui/use-toast';
-import { ProductUpdatesLink } from '@/components/v2/docs-note';
 import { env } from '@/env/frontend';
 import { FragmentType, graphql, useFragment } from '@/gql';
 import { OrganizationAccessScope, ProjectAccessScope, TargetAccessScope } from '@/gql/graphql';
@@ -849,22 +850,26 @@ export function OrganizationMemberRolesMigration(props: {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <CardTitle>Migration Wizard</CardTitle>
-        <CardDescription>
-          This wizard will help you migrate your organization's members to the new permissions
-          system.
-        </CardDescription>
-        <CardDescription>
-          Members are grouped by their access scopes.
-          <br /> You can choose to migrate all members from each group to a new role or assign them
-          to an existing role.
-        </CardDescription>
-        <ProductUpdatesLink href="2023-12-05-member-roles">
-          Read "Introducing Member Roles" product update to learn more.
-        </ProductUpdatesLink>
-      </div>
+    <SubPageLayout>
+      <SubPageLayoutHeader
+        title="Migration Wizard"
+        description={
+          <>
+            <CardDescription>
+              This wizard will help you migrate your organization's members to the new permissions
+              system.
+            </CardDescription>
+            <CardDescription>
+              Members are grouped by their access scopes.
+              <br /> You can choose to migrate all members from each group to a new role or assign
+              them to an existing role.
+            </CardDescription>
+            <ProductUpdatesLink href="2023-12-05-member-roles">
+              Read "Introducing Member Roles" product update to learn more.
+            </ProductUpdatesLink>
+          </>
+        }
+      />
       {organization.unassignedMembersToMigrate.length > 0 ? (
         <table className="w-full table-auto divide-y-[1px] divide-gray-500/20">
           <thead>
@@ -900,6 +905,6 @@ export function OrganizationMemberRolesMigration(props: {
           </div>
         </div>
       )}
-    </div>
+    </SubPageLayout>
   );
 }

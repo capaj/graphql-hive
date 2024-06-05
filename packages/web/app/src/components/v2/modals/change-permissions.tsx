@@ -1,7 +1,9 @@
 import { ReactElement } from 'react';
 import { PermissionsSpace, usePermissionsManager } from '@/components/organization/Permissions';
+import { Button } from '@/components/ui/button';
+import { Heading } from '@/components/ui/heading';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button, Heading, Modal } from '@/components/v2';
+import { Modal } from '@/components/v2';
 import { FragmentType, graphql, useFragment } from '@/gql';
 import { scopes } from '@/lib/access/common';
 
@@ -79,10 +81,15 @@ export function ChangePermissionsModal({
           />
         </Tabs>
         <div className="flex w-full gap-2">
-          <Button type="button" size="large" block onClick={toggleModalOpen}>
+          <Button
+            type="button"
+            size="lg"
+            className="w-full justify-center"
+            onClick={toggleModalOpen}
+          >
             Cancel
           </Button>
-          <Button type="submit" size="large" block variant="primary">
+          <Button type="submit" size="lg" className="w-full justify-center" variant="primary">
             Save permissions
           </Button>
         </div>

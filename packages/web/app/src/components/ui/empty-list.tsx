@@ -1,7 +1,9 @@
 import { ReactElement } from 'react';
 import magnifier from '../../../public/images/figures/magnifier.svg?url';
-import { Card, DocsLink, Heading } from '@/components/v2/index';
 import { cn } from '@/lib/utils';
+import { Card } from './card';
+import { DocsLink } from './docs-note';
+import { Heading } from './heading';
 
 export const EmptyList = ({
   title,
@@ -16,7 +18,7 @@ export const EmptyList = ({
 }): ReactElement => {
   return (
     <Card
-      className={cn('flex grow cursor-default flex-col items-center gap-y-2', className)}
+      className={cn('flex grow cursor-default flex-col items-center gap-y-2 py-4', className)}
       data-cy="empty-list"
     >
       <img

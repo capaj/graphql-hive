@@ -1,15 +1,8 @@
 import { ReactElement, useMemo, useState } from 'react';
 import { useQuery } from 'urql';
-import {
-  Button,
-  CopyValue,
-  DocsLink,
-  Heading,
-  Link,
-  Modal,
-  RadixSelect,
-  Tag,
-} from '@/components/v2';
+import { Button } from '@/components/ui/button';
+import { Heading } from '@/components/ui/heading';
+import { CopyValue, DocsLink, Link, Modal, RadixSelect, Tag } from '@/components/v2';
 import { graphql } from '@/gql';
 import { ProjectType } from '@/gql/graphql';
 import { getDocsUrl } from '@/lib/docs-url';
@@ -166,6 +159,9 @@ export const ConnectSchemaModal = (props: {
           <span className="text-sm text-gray-500">
             To authenticate,{' '}
             <Link
+              search={{
+                page: 'cdn',
+              }}
               variant="primary"
               className="font-bold underline"
               to="/$organizationId/$projectId/$targetId/settings"
@@ -209,7 +205,7 @@ export const ConnectSchemaModal = (props: {
       <Button
         type="button"
         variant="secondary"
-        size="large"
+        size="lg"
         onClick={toggleModalOpen}
         className="self-end"
       >

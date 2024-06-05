@@ -2,12 +2,13 @@ import { ReactElement } from 'react';
 import clsx from 'clsx';
 import { useMutation } from 'urql';
 import { Section } from '@/components/common';
-import { Button, Heading, Link } from '@/components/v2';
+import { Button } from '@/components/ui/button';
+import { Heading } from '@/components/ui/heading';
+import { Link } from '@/components/v2';
 import { FragmentType, graphql, useFragment } from '@/gql';
 import { BillingPlanType } from '@/gql/graphql';
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { CardElement } from '@stripe/react-stripe-js';
-import { useRouter } from '@tanstack/react-router';
 
 const GenerateStripeLinkMutation = graphql(`
   mutation GenerateStripeLinkMutation($selector: OrganizationSelectorInput!) {
@@ -36,7 +37,6 @@ export const ManagePaymentMethod = (props: {
   plan: BillingPlanType;
 }) => {
   const [mutation, mutate] = useMutation(GenerateStripeLinkMutation);
-  const router = useRouter();
   const organization = useFragment(BillingPaymentMethod_OrganizationFragment, props.organization);
   const info = organization.billingConfiguration.paymentMethod;
 
@@ -67,10 +67,7 @@ export const ManagePaymentMethod = (props: {
                 },
               }).then(result => {
                 if (result.data?.generateStripePortalLink) {
-                  void router.navigate({
-                    to: result.data.generateStripePortalLink,
-                  });
-                  // void router.push(result.data.generateStripePortalLink);
+                  window.location.href = result.data.generateStripePortalLink;
                 }
               });
             }}
